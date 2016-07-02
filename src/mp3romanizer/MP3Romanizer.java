@@ -38,7 +38,7 @@ public class MP3Romanizer {
         String Mp3Path = "F:\\Music\\REDЯUM\\審美眼とパラドックス。\\06 紅く光る。.mp3";
         Mp3File asMp3 = new Mp3File(Mp3Path);
         ID3v2 tag = asMp3.getId3v2Tag();
-
+ 
         // Collecting the subfields of the tag to be translated
         tag_data.add(tag.getTitle());
         tag_data.add(tag.getAlbum());
