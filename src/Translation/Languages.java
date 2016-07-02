@@ -65,9 +65,15 @@ public enum Languages {
 
     public static void listString() {
         System.out.println("Language: code");
-        for (Languages i : values()) {
-            System.out.println(i.name() + ": " + i.toString());
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < values().length; i++) {
+            sb.append(values()[i].name()).append(": "+values()[i]).append("   ");
+            if ((i + 1) % 8 == 0) {
+                sb.append("\n");
+            }
         }
+        System.out.print(sb.toString());
     }
 
     @Override
