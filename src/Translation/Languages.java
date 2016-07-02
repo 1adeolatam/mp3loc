@@ -69,11 +69,11 @@ public enum Languages {
         
         for (int i = 0; i < values().length; i++) {
             sb.append(values()[i].name()).append(": "+values()[i]).append("   ");
-            if ((i + 1) % 8 == 0) {
+            if ((i + 1) % 10 == 0) {
                 sb.append("\n");
             }
         }
-        System.out.print(sb.toString());
+        System.out.println(sb.toString());
     }
 
     @Override
