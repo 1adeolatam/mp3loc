@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import net.iharder.dnd.FileDrop;
 
 /**
  *
@@ -36,13 +37,14 @@ public class MP3Romanizer {
             Exception, NullPointerException {
         // Stores relevant metadata to be manipulated
         JFrame jf = new JFrame("Localizer");
-        jf.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        jf.setSize( 400, 600 );
-        jf.setVisible(true);
         JPanel jp = new JPanel();
         jf.add(jp);
-        
-        
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jf.setSize(400, 400);
+        jf.setVisible(true);
+
+     
+
         List<String> tag_data = new ArrayList<>();
 
         String Mp3Path = "F:\\Music\\REDЯUM\\審美眼とパラドックス。\\06 紅く光る。.mp3";
@@ -98,4 +100,5 @@ public class MP3Romanizer {
         }
 
     }
+
 }
