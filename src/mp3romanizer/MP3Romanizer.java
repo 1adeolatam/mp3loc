@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -33,12 +35,20 @@ public class MP3Romanizer {
     public static void main(String[] args) throws IOException,
             Exception, NullPointerException {
         // Stores relevant metadata to be manipulated
+        JFrame jf = new JFrame("Localizer");
+        jf.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        jf.setSize( 400, 600 );
+        jf.setVisible(true);
+        JPanel jp = new JPanel();
+        jf.add(jp);
+        
+        
         List<String> tag_data = new ArrayList<>();
 
         String Mp3Path = "F:\\Music\\REDЯUM\\審美眼とパラドックス。\\06 紅く光る。.mp3";
         Mp3File asMp3 = new Mp3File(Mp3Path);
         ID3v2 tag = asMp3.getId3v2Tag();
- 
+
         // Collecting the subfields of the tag to be translated
         tag_data.add(tag.getTitle());
         tag_data.add(tag.getAlbum());
@@ -51,8 +61,8 @@ public class MP3Romanizer {
 //            Object element = itr.next();
 //            System.out.println(element + " ");
 //        }
-     Languages.listString();
-     
+        Languages.listString();
+
         int it = 0;
         while (itr.hasNext()) {
             Object ele = itr.next();
@@ -61,32 +71,31 @@ public class MP3Romanizer {
             URL cur = t.primeLink(Languages.English);
             ele = t.fromWebsite(cur);
             tag_data.set(it, (String) ele);
-            if(test)System.out.println(tag_data.get(it));
+            if (test) {
+                System.out.println(tag_data.get(it));
+            }
             it++;
         }
-     
-        
         // Comparison message
-        System.out.println("Would you like to change to new data? from \n" + orig.toString() + " to\n" + tag_data.toString());
-        Scanner input = new Scanner(System.in);
-        if (input.nextLine().equalsIgnoreCase("yes")) {
-            // Apply changes to tag data
-            tag.setTitle(tag_data.get(0));
-            tag.setAlbum(tag_data.get(1));
-            tag.setArtist(tag_data.get(2));
-            tag.setAlbumArtist(tag_data.get(3));
-
-            if (test)System.out.println(asMp3.getId3v2Tag().getTitle());
-            
-            File newmp3 = new File(tag_data.get(0) + ".mp3");
-            if (test)System.out.println(newmp3);
-            
-            newmp3.createNewFile();
-            // create copy of localized song
-            asMp3.save(tag_data.get(0) + ".mp3");
+        if (orig.toString().equalsIgnoreCase(tag_data.toString())) {
+            System.out.println("You are converting to the same language!!!");
         } else {
-            System.out.println("GOOD BYE!");
+            System.out.println("Would you like to change to new data from \n" + orig.toString() + " to\n" + tag_data.toString());
+            Scanner input = new Scanner(System.in);
+            if (input.nextLine().equalsIgnoreCase("yes")) {
+                // Apply changes to tag data
+                tag.setTitle(tag_data.get(0));
+                tag.setAlbum(tag_data.get(1));
+                tag.setArtist(tag_data.get(2));
+                tag.setAlbumArtist(tag_data.get(3));
+                File newmp3 = new File(tag_data.get(0) + ".mp3");
+                newmp3.createNewFile();
+                // create copy of localized song
+                asMp3.save(tag_data.get(0) + ".mp3");
+            } else {
+                System.out.println("GOOD BYE!");
+            }
         }
-    }
 
+    }
 }
