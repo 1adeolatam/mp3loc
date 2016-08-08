@@ -16,8 +16,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import net.iharder.dnd.FileDrop;
 
 /**
@@ -36,18 +39,27 @@ public class MP3Romanizer {
     public static void main(String[] args) throws IOException,
             Exception, NullPointerException {
         // Stores relevant metadata to be manipulated
-        JFrame jf = new JFrame("Localizer");
-        JPanel jp = new JPanel();
-        jf.add(jp);
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jf.setSize(400, 400);
-        jf.setVisible(true);
-
-     
 
         List<String> tag_data = new ArrayList<>();
-
-        String Mp3Path = "F:\\Music\\REDЯUM\\審美眼とパラドックス。\\06 紅く光る。.mp3";
+        JButton but = new JButton();
+        JFileChooser choose = new JFileChooser("F:\\Music\\");
+        choose.setDialogTitle("Mp3 Tag Localizer");
+        
+        if (choose.showOpenDialog(but) == JFileChooser.APPROVE_OPTION) {
+        }
+        
+        if (test) {
+            System.out.println(choose.getSelectedFile().getAbsolutePath());
+        }
+        // Makes sure only mp3s are selected
+        String Mp3Path = null;
+       if(choose.getSelectedFile().getAbsolutePath().endsWith(".mp3")){
+           Mp3Path = choose.getSelectedFile().getAbsolutePath();
+       }else{
+           System.err.println("Invalid File Type");
+           System.exit(0);
+       }
+        
         Mp3File asMp3 = new Mp3File(Mp3Path);
         ID3v2 tag = asMp3.getId3v2Tag();
 
