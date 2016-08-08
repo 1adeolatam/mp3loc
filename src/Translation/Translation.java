@@ -35,6 +35,7 @@ public class Translation {
     //Init text
     public void text(String toBeTrans) {
         text = toBeTrans;
+       // System.out.println(text);
     } 
     
 
